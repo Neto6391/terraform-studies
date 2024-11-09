@@ -37,3 +37,18 @@ output "ec2_ids" {
   description = "Lista de máquinas EC2"
   value       = aws_instance.machine_ec2[*].id
 }
+
+output "db_subnet_group_subnets" {
+  description = "Lista de grupo de subnets para o banco de dados RDS"
+  value       = aws_db_subnet_group.database-1.subnet_ids
+}
+
+output "load_balancer_distribution_domain_name" {
+  description = "CloudFront de Distribuição do Load Balancer"
+  value       = aws_cloudfront_distribution.load_balancer_distribution.domain_name
+}
+
+output "s3_distribution_domain_name" {
+  description = "CloudFront de Distribuição do S3"
+  value       = aws_cloudfront_distribution.s3_distribution.domain_name
+}

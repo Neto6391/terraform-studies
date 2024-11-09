@@ -26,3 +26,21 @@ variable "instance_type" {
   type        = string
   default     = "t2.micro"
 }
+
+variable "master_password" {
+  description = "Master password for the RDS"
+  type        = string
+  default     = "admin1234"
+}
+
+variable "iops" {
+  description = "IOPS for the RDS"
+  type        = number
+  default     = 3000
+}
+
+variable "allocated_storage" {
+  description = "Allocated storage for the RDS"
+  type        = number
+  default     = 400
+}

@@ -40,3 +40,15 @@ resource "aws_subnet" "private_db" {
     Managed_by  = "terraform"
   }
 }
+
+resource "aws_db_subnet_group" "database-1" {
+  name        = "database-1"
+  description = "Grupo de Subnet para banco de dados RDS"
+  subnet_ids  = aws_subnet.private_db[*].id
+
+  tags = {
+    Name        = "${var.environment}-db-subnet-group"
+    Environment = var.environment
+    Managed_by  = "terraform"
+  }
+}

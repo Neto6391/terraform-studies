@@ -6,3 +6,8 @@ resource "aws_s3_bucket" "my_bucket" {
     Environment = var.environment
   }
 }
+
+resource "aws_s3_bucket_policy" "my_bucket_policy" {
+  bucket = aws_s3_bucket.my_bucket.id
+  policy = local.s3_policy
+}
