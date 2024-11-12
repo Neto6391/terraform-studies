@@ -10,4 +10,5 @@ resource "aws_rds_cluster" "database-1" {
   iops                      = var.iops
   master_username           = "admin"
   master_password           = var.master_password
+  skip_final_snapshot       = true
 }

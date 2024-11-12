@@ -85,6 +85,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
+  comment             = "Distribuição CloudFront para o bucket S3"
   default_root_object = "index.html"
 
   default_cache_behavior {

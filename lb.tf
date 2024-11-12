@@ -5,7 +5,7 @@ resource "aws_lb" "front_end" {
   security_groups    = [aws_security_group.lb-sec.id]
   subnets            = aws_subnet.public[*].id
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Name        = "front-end"
@@ -14,7 +14,7 @@ resource "aws_lb" "front_end" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name        = "front-end-target-group"
+  name        = "front-end-target-group-${random_id.suffix.hex}"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
@@ -47,8 +47,12 @@ resource "aws_lb_listener" "http" {
 
 
 resource "aws_lb_target_group_attachment" "front_end" {
-  for_each         = { for instance in aws_instance.machine_ec2 : instance.id => instance }
+  for_each         = { for idx, instance in aws_instance.machine_ec2 : idx => instance }
   target_group_arn = aws_lb_target_group.main.arn
   target_id        = each.value.id
   port             = 80
+}
+
+resource "random_id" "suffix" {
+  byte_length = 4
 }
